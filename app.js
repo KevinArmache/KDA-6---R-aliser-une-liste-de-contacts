@@ -1,117 +1,104 @@
-//CREATION VARIABLE
+//CREATION VARIABLE ET CONNEXION POUR RECUPERATION
 
 var prenomHTML = document.querySelector("#Prenom");
 var nomHTML = document.querySelector("#Nom");
 var buttonHTML = document.querySelector("#Button");
-var BlockEnvoi = document.querySelector("#BlockEnvoi");
-var removeimg = document.createElement("img");
-// Gauche
-var Gauche = document.querySelector("#Gauche");
-// Droite
-var Droite = document.querySelector("#Droite");
-// Droile Select
 var selectHTML = document.querySelector("#mySelect");
-// Gauche Image
 var imageHTML = document.querySelector("#Image");
-//Bio
-var BioHTML = document.querySelector("#Bio");
-var Reception = [];
+var bioHTML = document.querySelector("#Bio");
+var divEnvoi = document.querySelector("#BlockEnvoi");
+// TABLEAU DE RECEPTION DES CONTENUS
+var reception = [];
+// STYLE POUR LA RECEPTION DES CONTENUS
+divEnvoi.style.display = "flex";
+divEnvoi.style.flexWrap = "wrap";
+divEnvoi.style.justifyContent = "center";
 
-BlockEnvoi.style.display = "flex";
-BlockEnvoi.style.flexWrap = "wrap";
-BlockEnvoi.style.justifyContent = "center";
-
-buttonHTML.addEventListener("click", function () {
-  Reception.push({
-    img: imageHTML.value,
-    nom: nomHTML.value,
-    prenom: prenomHTML.value,
-    select: selectHTML.value,
-    bio: BioHTML.value,
-  });
-  console.log(Reception);
-  afficher();
-});
-
+// CREATION D'UNE FONCTION POUR L'AFFICHAGE DU CONTENU
 function afficher() {
-  var Gauche = document.createElement("div");
-  var Droite = document.createElement("div");
-  Droite.setAttribute("id", "Droite");
-  Gauche.setAttribute("id", "Gauche");
-  var removeButton = document.createElement("button");
- 
-  var removeimg = document.createElement("img");
-  var personne = Reception[Reception.length - 1];
-  var PrenomNom = document.createElement("p");
 
-  PrenomNom.textContent = personne.prenom + " " + personne.nom;
-  PrenomNom.setAttribute("id", "PrenomNomJS");
-  removeimg.setAttribute("src", "close.jpg");
-  removeButton.style.float = "right";
-  removeimg.style.width = "20px";
-  removeimg.style.height = "20px";
-  var select = document.createElement("p");
-  select.setAttribute("id", "SelectJS");
-  select.innerText = personne.select;
+// CREATION DES VARIABLES 
+
+  var personne = reception[reception.length - 1];
+  var gauche = document.createElement("div");
+  var droite = document.createElement("div");
+  var suppression_img = document.createElement("img");
+  var suppression_Btn = document.createElement("button");
+  var suppression_img = document.createElement("img");
+  var prenomNom = document.createElement("p");
   var bio = document.createElement("p");
-  bio.setAttribute("id", "BioJS");
+  var select = document.createElement("p");
+  var image = document.createElement("img");
+
+//AFFECTATON DES ID ET EMPLACEMENTS
+
+droite.setAttribute("id", "Droite");
+gauche.setAttribute("id", "Gauche");
+prenomNom.setAttribute("id", "PrenomNomJS");
+suppression_img.setAttribute("src", "close.jpg");
+select.setAttribute("id", "SelectJS");
+bio.setAttribute("id", "BioJS");
+image.setAttribute("src", "kk.jpg");
+divEnvoi.appendChild(gauche);
+gauche.appendChild(image);
+divEnvoi.appendChild(droite);
+divEnvoi.appendChild(suppression_Btn);
+divEnvoi.appendChild(suppression_img);
+droite.appendChild(prenomNom);
+droite.appendChild(suppression_Btn);
+droite.appendChild(suppression_img);
+suppression_Btn.appendChild(suppression_img);
+droite.appendChild(prenomNom);
+droite.appendChild(select);
+droite.appendChild(bio);
+
+// ECRITURE DU CONTENU
+
+  prenomNom.textContent = personne.prenom + " " + personne.nom;
+  select.innerText = personne.select;
   bio.innerText = personne.bio;
 
-  // emplacement des push
+// LES STYLES
 
-  //gauche
-  BlockEnvoi.appendChild(Gauche);
-  BlockEnvoi.appendChild(removeButton);
-  BlockEnvoi.appendChild(removeimg);
-  Droite.appendChild(PrenomNom);
-  Droite.appendChild(removeButton);
-  Droite.appendChild(removeimg);
-  removeButton.appendChild(removeimg);
-  var image = document.createElement("img");
-  image.setAttribute("src", "kk.jpg");
+  suppression_Btn.style.float = "right";
+  suppression_img.style.width = "20px";
+  suppression_img.style.height = "20px";
   image.style.height = "100px";
   image.style.width = "100px";
   image.style.borderRadius = "100%";
   image.style.marginLeft = "10px";
+  gauche.style.backgroundColor = "#f6f6f6";
+  gauche.style.marginTop = "5px";
+  gauche.style.marginBottom = "5px";
+  gauche.style.height = "100px";
+  gauche.style.borderBottomLeftRadius = "30px";
+  gauche.style.borderTopLeftRadius = "30px";
+  gauche.style.width = "20%";
+  droite.style.width = "75%";
+  droite.style.marginTop = "5px";
+  droite.style.marginBottom = "5px";
+  droite.style.backgroundColor = "#f6f6f6";
+  droite.style.backgroundColor = "#f6f6f6";
 
-  Gauche.style.backgroundColor = "#f6f6f6";
+  //BOUTON SUPPRESION
 
-  Gauche.style.marginTop = "5px";
-  Gauche.style.marginBottom = "5px";
-  Gauche.style.height = "100px";
-  Gauche.style.borderBottomLeftRadius = "30px";
-  Gauche.style.borderTopLeftRadius = "30px";
-  Gauche.style.width = "20%";
-  Gauche.appendChild(image);
-
-  // droite
-
-  BlockEnvoi.appendChild(Droite);
-  Droite.appendChild(PrenomNom);
-  Droite.appendChild(select);
-  Droite.appendChild(bio);
-
-  
-  Droite.style.width = "75%";
-  Droite.style.marginTop = "5px";
-  Droite.style.marginBottom = "5px";
-  Droite.style.backgroundColor = "#f6f6f6";
-    Droite.style.backgroundColor = "#f6f6f6";
-
-
-  removeButton.addEventListener("click", function () {
-    // e.preventDefault()
-    Droite.remove();
-    Gauche.remove();
+  suppression_Btn.addEventListener("click", function () {
+    
+    droite.remove();
+    gauche.remove();
   });
 }
 
-// Remove creer focntion a l'interieur de fonction afficher pour remove
+//BOUTON D'ENVOI
 
-// prenomAndNom.innerText = Reception[0].prenom + " " + Reception[0].nom
-// select.innerText = (selectHTML).value
-// Bio.innerText = (BioHTML).value
-// image.setAttribute("src", "kk.jpg")
-// image.style.width = "100px"
-// image.style.height = "100px"
-// image.style.borderRadius = "100%"
+buttonHTML.addEventListener("click", function () {
+  reception.push({
+    img: imageHTML.value,
+    nom: nomHTML.value,
+    prenom: prenomHTML.value,
+    select: selectHTML.value,
+    bio: bioHTML.value,
+  });
+  console.log(reception);
+  afficher();
+});
